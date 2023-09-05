@@ -1,0 +1,19 @@
+#Dockerfile
+
+FROM centos:7
+
+LABEL maintainer="Your best teacher"
+
+RUN yum -y update && yum clean all
+
+RUN yum -y install httpd
+
+COPY index.html /var/www/html/
+
+EXPOSE 80
+
+#Start httpd at container runtime
+ENTRYPOINT ['"/user/sbin/httpd"]
+
+#Run entrypoint in the background
+CMD ["-D", "FOREGROUND"]
